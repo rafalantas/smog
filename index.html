@@ -95,8 +95,11 @@
     min-height: 100vh;
   }
 
-  /* ─── Layout ─── */
-  .page { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
 
   .header {
     display: flex;
@@ -105,6 +108,8 @@
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border);
+    gap: 12px;
+    flex-wrap: wrap;
   }
 
   .header-left h1 {
@@ -135,11 +140,22 @@
 
   .status-dot::before {
     content: '';
-    width: 7px; height: 7px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: var(--green);
     box-shadow: 0 0 6px var(--green);
     animation: pulse 2s ease-in-out infinite;
+  }
+
+  .status-dot.stale::before {
+    background: var(--amber);
+    box-shadow: 0 0 6px var(--amber);
+  }
+
+  .status-dot.offline::before {
+    background: var(--red);
+    box-shadow: 0 0 6px var(--red);
   }
 
   @keyframes pulse {
@@ -147,7 +163,6 @@
     50% { opacity: 0.4; }
   }
 
-  /* ─── Metrics grid ─── */
   .metrics-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -155,9 +170,14 @@
     margin-bottom: 1.5rem;
   }
 
-  @media (max-width: 800px) {
-    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-    .metrics-grid .card:last-child { grid-column: 1 / -1; }
+  @media (max-width: 900px) {
+    .metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .metrics-grid .card:last-child {
+      grid-column: 1 / -1;
+    }
   }
 
   .card {
@@ -170,7 +190,9 @@
     transition: border-color 0.2s;
   }
 
-  .card:hover { border-color: var(--border-strong); }
+  .card:hover {
+    border-color: var(--border-strong);
+  }
 
   .card-label {
     font-size: 11px;
@@ -198,7 +220,9 @@
 
   .card-bar {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: 3px;
     border-radius: 0 0 12px 12px;
     transition: width 0.8s cubic-bezier(.4,0,.2,1);
@@ -215,22 +239,17 @@
     border-radius: 6px;
   }
 
-  /* ─── AQI colors ─── */
-  .q-good    { background: var(--green-bg);  color: var(--green); }
-  .q-moderate{ background: var(--amber-bg);  color: var(--amber); }
-  .q-bad     { background: var(--red-bg);    color: var(--red); }
-  .bar-good  { background: linear-gradient(90deg, var(--green), transparent); }
+  .q-good { background: var(--green-bg); color: var(--green); }
+  .q-moderate { background: var(--amber-bg); color: var(--amber); }
+  .q-bad { background: var(--red-bg); color: var(--red); }
+
+  .bar-good { background: linear-gradient(90deg, var(--green), transparent); }
   .bar-moderate { background: linear-gradient(90deg, var(--amber), transparent); }
-  .bar-bad   { background: linear-gradient(90deg, var(--red), transparent); }
-  .bar-temp  { background: linear-gradient(90deg, var(--accent), transparent); }
-  .bar-hum   { background: linear-gradient(90deg, var(--teal), transparent); }
-  .bar-pres  { background: linear-gradient(90deg, var(--purple), transparent); }
+  .bar-bad { background: linear-gradient(90deg, var(--red), transparent); }
+  .bar-temp { background: linear-gradient(90deg, var(--accent), transparent); }
+  .bar-hum { background: linear-gradient(90deg, var(--teal), transparent); }
+  .bar-pres { background: linear-gradient(90deg, var(--purple), transparent); }
 
-  .value-good    { color: var(--green); }
-  .value-moderate{ color: var(--amber); }
-  .value-bad     { color: var(--red); }
-
-  /* ─── Chart panel ─── */
   .chart-panel {
     background: var(--card);
     border: 1px solid var(--border);
@@ -244,6 +263,8 @@
     justify-content: space-between;
     padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--border);
+    gap: 10px;
+    flex-wrap: wrap;
   }
 
   .chart-title {
@@ -256,6 +277,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
   }
 
   .btn {
@@ -270,7 +292,10 @@
     transition: all 0.15s;
   }
 
-  .btn:hover { border-color: var(--border-strong); color: var(--text); }
+  .btn:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+  }
 
   .btn-primary {
     background: var(--accent-glow);
@@ -278,7 +303,10 @@
     color: var(--accent);
   }
 
-  .btn-primary:hover { background: rgba(79,142,247,0.2); color: var(--accent); }
+  .btn-primary:hover {
+    background: rgba(79,142,247,0.2);
+    color: var(--accent);
+  }
 
   select.btn {
     appearance: none;
@@ -293,7 +321,9 @@
     height: 420px;
   }
 
-  #chart-container .highcharts-background { fill: transparent; }
+  #chart-container .highcharts-background {
+    fill: transparent;
+  }
 
   .loading-msg {
     display: flex;
@@ -306,16 +336,18 @@
   }
 
   .spinner {
-    width: 18px; height: 18px;
+    width: 18px;
+    height: 18px;
     border: 2px solid var(--border);
     border-top-color: var(--accent);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
 
-  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
 
-  /* ─── Footer row ─── */
   .footer-row {
     display: flex;
     align-items: center;
@@ -338,7 +370,8 @@
 
   input[type="checkbox"]#Update {
     appearance: none;
-    width: 32px; height: 18px;
+    width: 32px;
+    height: 18px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 9px;
@@ -350,8 +383,10 @@
   input[type="checkbox"]#Update::after {
     content: '';
     position: absolute;
-    top: 2px; left: 2px;
-    width: 12px; height: 12px;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: var(--text-muted);
     transition: transform 0.2s, background 0.2s;
@@ -367,7 +402,6 @@
     background: var(--accent);
   }
 
-  /* ─── Highcharts theme overrides (light + dark via CSS vars) ─── */
   .highcharts-title { fill: var(--text) !important; }
   .highcharts-axis-labels text { fill: var(--text-muted) !important; }
   .highcharts-axis-title { fill: var(--text-muted) !important; }
@@ -391,7 +425,7 @@
   <div class="header">
     <div class="header-left">
       <h1>Jakość powietrza — Hajnówka</h1>
-      <p>ul. Targowa / Bielska &nbsp;·&nbsp; czujnik zewnętrzny</p>
+      <p>kanał ThingSpeak 265521 · BME + SDS</p>
     </div>
     <div class="status-dot" id="status-label">Ładowanie…</div>
   </div>
@@ -404,6 +438,7 @@
       <div class="card-quality" id="q-pm10"></div>
       <div class="card-bar bar-good" id="bar-pm10" style="width:0%"></div>
     </div>
+
     <div class="card" id="card-pm25">
       <div class="card-label">PM2.5</div>
       <div class="card-value" id="val-pm25">—</div>
@@ -411,32 +446,36 @@
       <div class="card-quality" id="q-pm25"></div>
       <div class="card-bar bar-good" id="bar-pm25" style="width:0%"></div>
     </div>
+
     <div class="card">
       <div class="card-label">Temperatura</div>
       <div class="card-value" id="val-temp">—</div>
       <div class="card-unit">°C</div>
-      <div class="card-bar bar-temp" style="width:60%"></div>
+      <div class="card-bar bar-temp" id="bar-temp" style="width:0%"></div>
     </div>
+
     <div class="card">
       <div class="card-label">Wilgotność</div>
       <div class="card-value" id="val-hum">—</div>
       <div class="card-unit">%</div>
-      <div class="card-bar bar-hum" style="width:70%"></div>
+      <div class="card-bar bar-hum" id="bar-hum" style="width:0%"></div>
     </div>
+
     <div class="card">
       <div class="card-label">Ciśnienie</div>
       <div class="card-value" id="val-pres">—</div>
       <div class="card-unit">hPa</div>
-      <div class="card-bar bar-pres" style="width:55%"></div>
+      <div class="card-bar bar-pres" id="bar-pres" style="width:0%"></div>
     </div>
   </div>
 
-  <!-- Chart -->
   <div class="chart-panel">
     <div class="chart-header">
       <span class="chart-title">Historia pomiarów</span>
       <div class="chart-controls">
-        <select class="btn" id="Channel Select"><option>Smog</option></select>
+        <select class="btn" id="ChannelSelect">
+          <option>265521 / BME + SDS</option>
+        </select>
         <select class="btn" id="Loads">
           <option value="1">1 pakiet</option>
           <option value="2">2 pakiety</option>
@@ -449,12 +488,14 @@
         <button class="btn btn-primary" onclick="loadOneChannel()">Załaduj historię</button>
       </div>
     </div>
+
     <div id="chart-container">
       <div class="loading-msg" id="chart-loading">
         <div class="spinner"></div>
         Ładowanie danych z ThingSpeak…
       </div>
     </div>
+
     <div class="footer-row">
       <label class="update-toggle">
         <input type="checkbox" id="Update" checked>
@@ -473,89 +514,137 @@ var myOffset = new Date().getTimezoneOffset();
 
 var channelKeys = [];
 channelKeys.push({
-  channelNumber: 265521, name: 'Smog', key: 'KVL54F9GANX4XLYM',
+  channelNumber: 265521,
+  name: 'BME + SDS',
+  key: 'KVL54F9GANX4XLYM',
   fieldList: [
+    {field:1, axis:'T', suffix:'μg/m³'},
+    {field:2, axis:'T', suffix:'μg/m³'},
     {field:3, axis:'T', suffix:'°C'},
     {field:4, axis:'T', suffix:'%'},
-    {field:5, axis:'Q', suffix:'hPa'},
-    {field:1, axis:'T', suffix:'μg/m³'},
-    {field:2, axis:'T', suffix:'μg/m³'}
+    {field:5, axis:'Q', suffix:'hPa'}
   ]
 });
 
 function getChartDate(d) {
-  return Date.UTC(d.substring(0,4), d.substring(5,7)-1, d.substring(8,10),
-    d.substring(11,13), d.substring(14,16), d.substring(17,19)) - (myOffset * 60000);
+  return Date.UTC(
+    d.substring(0,4),
+    d.substring(5,7)-1,
+    d.substring(8,10),
+    d.substring(11,13),
+    d.substring(14,16),
+    d.substring(17,19)
+  ) - (myOffset * 60000);
 }
 
 function HideAll() {
   if (!dynamicChart) return;
   for (var i = 0; i < dynamicChart.series.length; i++) {
-    if (dynamicChart.series[i].name !== 'Navigator')
+    if (dynamicChart.series[i].name !== 'Navigator') {
       dynamicChart.series[i].hide();
+    }
   }
 }
 
-// ─── Metric cards ───
 function pmQuality(val, pollutant) {
   if (pollutant === 'pm10') {
-    if (val <= 50)  return {label:'Dobra',   cls:'q-good',    bar:'bar-good',    pct: val/300*100};
-    if (val <= 100) return {label:'Średnia', cls:'q-moderate',bar:'bar-moderate',pct: val/300*100};
-    return              {label:'Zła',    cls:'q-bad',     bar:'bar-bad',     pct: Math.min(val/300*100,100)};
+    if (val <= 50) return {label:'Dobra', cls:'q-good', bar:'bar-good', pct: val / 300 * 100};
+    if (val <= 100) return {label:'Średnia', cls:'q-moderate', bar:'bar-moderate', pct: val / 300 * 100};
+    return {label:'Zła', cls:'q-bad', bar:'bar-bad', pct: Math.min(val / 300 * 100, 100)};
   } else {
-    if (val <= 25)  return {label:'Dobra',   cls:'q-good',    bar:'bar-good',    pct: val/150*100};
-    if (val <= 50)  return {label:'Średnia', cls:'q-moderate',bar:'bar-moderate',pct: val/150*100};
-    return              {label:'Zła',    cls:'q-bad',     bar:'bar-bad',     pct: Math.min(val/150*100,100)};
+    if (val <= 25) return {label:'Dobra', cls:'q-good', bar:'bar-good', pct: val / 150 * 100};
+    if (val <= 50) return {label:'Średnia', cls:'q-moderate', bar:'bar-moderate', pct: val / 150 * 100};
+    return {label:'Zła', cls:'q-bad', bar:'bar-bad', pct: Math.min(val / 150 * 100, 100)};
   }
+}
+
+function getFreshness(createdAt) {
+  if (!createdAt) return {label:'Brak danych', cls:'offline'};
+  var sampleTime = new Date(createdAt);
+  var now = new Date();
+  var diffMin = (now - sampleTime) / 60000;
+
+  if (diffMin <= 20) return {label:'Na żywo', cls:''};
+  if (diffMin <= 90) return {label:'Opóźnione dane', cls:'stale'};
+  return {label:'Brak świeżych danych', cls:'offline'};
+}
+
+function setStatus(createdAt) {
+  var el = document.getElementById('status-label');
+  var freshness = getFreshness(createdAt);
+  el.textContent = freshness.label;
+  el.className = 'status-dot ' + freshness.cls;
+}
+
+function updateMetricBar(id, value, maxValue) {
+  var pct = Math.max(0, Math.min((value / maxValue) * 100, 100));
+  document.getElementById(id).style.width = pct + '%';
 }
 
 function updateMetrics(data) {
-  var temp = parseFloat(data.field1);
-  var hum  = parseFloat(data.field2);
-  var pres = parseFloat(data.field3);
-  var pm25 = parseFloat(data.field4);
-  var pm10 = parseFloat(data.field5);
+  var pm25 = parseFloat(data.field1);
+  var pm10 = parseFloat(data.field2);
+  var temp = parseFloat(data.field3);
+  var hum  = parseFloat(data.field4);
+  var pres = parseFloat(data.field5);
 
-  if (!isNaN(temp)) document.getElementById('val-temp').textContent = temp.toFixed(1);
-  if (!isNaN(hum))  document.getElementById('val-hum').textContent  = Math.round(hum);
-  if (!isNaN(pres)) document.getElementById('val-pres').textContent = Math.round(pres);
+  if (!isNaN(temp)) {
+    document.getElementById('val-temp').textContent = temp.toFixed(1);
+    updateMetricBar('bar-temp', temp + 20, 60);
+  }
+
+  if (!isNaN(hum)) {
+    document.getElementById('val-hum').textContent = Math.round(hum);
+    updateMetricBar('bar-hum', hum, 100);
+  }
+
+  if (!isNaN(pres)) {
+    document.getElementById('val-pres').textContent = Math.round(pres);
+    updateMetricBar('bar-pres', pres - 950, 100);
+  }
 
   if (!isNaN(pm10)) {
     document.getElementById('val-pm10').textContent = Math.round(pm10);
-    var q = pmQuality(pm10, 'pm10');
-    var qel = document.getElementById('q-pm10');
-    qel.className = 'card-quality ' + q.cls;
-    qel.textContent = q.label;
-    var bar = document.getElementById('bar-pm10');
-    bar.className = 'card-bar ' + q.bar;
-    bar.style.width = Math.min(q.pct, 100) + '%';
-    document.getElementById('val-pm10').className = 'card-value';
+    var q10 = pmQuality(pm10, 'pm10');
+    var qel10 = document.getElementById('q-pm10');
+    qel10.className = 'card-quality ' + q10.cls;
+    qel10.textContent = q10.label;
+    var bar10 = document.getElementById('bar-pm10');
+    bar10.className = 'card-bar ' + q10.bar;
+    bar10.style.width = Math.min(q10.pct, 100) + '%';
   }
 
   if (!isNaN(pm25)) {
     document.getElementById('val-pm25').textContent = Math.round(pm25);
-    var q2 = pmQuality(pm25, 'pm25');
-    var qel2 = document.getElementById('q-pm25');
-    qel2.className = 'card-quality ' + q2.cls;
-    qel2.textContent = q2.label;
-    var bar2 = document.getElementById('bar-pm25');
-    bar2.className = 'card-bar ' + q2.bar;
-    bar2.style.width = Math.min(q2.pct, 100) + '%';
+    var q25 = pmQuality(pm25, 'pm25');
+    var qel25 = document.getElementById('q-pm25');
+    qel25.className = 'card-quality ' + q25.cls;
+    qel25.textContent = q25.label;
+    var bar25 = document.getElementById('bar-pm25');
+    bar25.className = 'card-bar ' + q25.bar;
+    bar25.style.width = Math.min(q25.pct, 100) + '%';
   }
 
+  setStatus(data.created_at);
+
+  var sampleTime = data.created_at ? new Date(data.created_at) : null;
   var now = new Date();
-  document.getElementById('last-update').textContent =
-    'Ostatnia aktualizacja: ' + now.toLocaleTimeString('pl-PL');
-  document.getElementById('status-label').textContent = 'Na żywo';
+  var txt = 'Ostatnia aktualizacja panelu: ' + now.toLocaleTimeString('pl-PL');
+  if (sampleTime) {
+    txt += ' · próbka: ' + sampleTime.toLocaleString('pl-PL');
+  }
+  document.getElementById('last-update').textContent = txt;
 }
 
 function fetchMetrics() {
-  $.getJSON('https://api.thingspeak.com/channels/706724/feed/last.json', function(data) {
+  $.getJSON('https://api.thingspeak.com/channels/265521/feeds/last.json?api_key=KVL54F9GANX4XLYM', function(data) {
     updateMetrics(data);
+  }).fail(function() {
+    document.getElementById('status-label').textContent = 'Błąd połączenia';
+    document.getElementById('status-label').className = 'status-dot offline';
   });
 }
 
-// ─── Chart ───
 $(document).ready(function() {
   var seriesCounter = 0;
   for (var ci = 0; ci < channelKeys.length; ci++) {
@@ -573,147 +662,153 @@ $(document).ready(function() {
     channelKeys[ci].loaded = false;
     loadInitial(ci);
   }
-
-  function loadInitial(channelIndex) {
-    var ch = channelKeys[channelIndex];
-    $.getJSON('https://api.thingspeak.com/channels/'+ch.channelNumber+'/feed.json?offset=0&results=2500&key='+ch.key, function(data) {
-      for (var fi = 0; fi < ch.fieldList.length; fi++) {
-        ch.fieldList[fi].data = [];
-        for (var h = 0; h < data.feeds.length; h++) {
-          var v = data.feeds[h]['field'+ch.fieldList[fi].field];
-          var p = [getChartDate(data.feeds[h].created_at), parseFloat(v)];
-          if (!isNaN(parseInt(v))) ch.fieldList[fi].data.push(p);
-        }
-        ch.fieldList[fi].name = data.channel['field'+ch.fieldList[fi].field];
-      }
-      ch.loaded = true;
-      channelsLoaded++;
-      if (channelsLoaded === channelKeys.length) createChart();
-    }).fail(function() {
-      document.getElementById('chart-loading').innerHTML = '⚠ Błąd ładowania danych z ThingSpeak.';
-    });
-  }
-
-  function createChart() {
-    document.getElementById('chart-loading').style.display = 'none';
-
-    var series = [];
-    for (var ci = 0; ci < channelKeys.length; ci++) {
-      for (var fi = 0; fi < channelKeys[ci].fieldList.length; fi++) {
-        series.push({
-          data: channelKeys[ci].fieldList[fi].data,
-          index: channelKeys[ci].fieldList[fi].series,
-          yAxis: channelKeys[ci].fieldList[fi].axis,
-          name: channelKeys[ci].fieldList[fi].name,
-          tooltip: {valueSuffix: ' '+channelKeys[ci].fieldList[fi].suffix, valueDecimals: 1}
-        });
-      }
-    }
-
-    var cs = getComputedStyle(document.documentElement);
-    var cv = function(n) { return cs.getPropertyValue(n).trim(); };
-
-    dynamicChart = new Highcharts.StockChart({
-      chart: {
-        renderTo: 'chart-container',
-        backgroundColor: 'transparent',
-        zoomType: 'xy',
-        style: { fontFamily: "'Inter', sans-serif" }
-      },
-      rangeSelector: {
-        buttonTheme: {
-          fill: cv('--hc-btn-bg'), stroke: cv('--border'),
-          style: { color: cv('--text-muted') },
-          states: {
-            hover: { fill: cv('--hc-btn-hover') },
-            select: { fill: cv('--hc-btn-sel'), style: { color: cv('--text') } }
-          }
-        },
-        inputStyle: { color: cv('--text-muted'), background: cv('--hc-btn-bg') },
-        labelStyle: { color: cv('--text-muted') },
-        buttons: [
-          {count:30, type:'minute', text:'30m'},
-          {count:12, type:'hour',   text:'12h'},
-          {count:1,  type:'day',    text:'1d'},
-          {count:1,  type:'week',   text:'1t'},
-          {count:1,  type:'month',  text:'1M'},
-          {type:'all', text:'Wszystko'}
-        ],
-        selected: 1
-      },
-      title: { text: null },
-      tooltip: {
-        shared: true,
-        xDateFormat: '%A, %d.%m.%Y %H:%M',
-        backgroundColor: cv('--hc-tooltip-bg'),
-        borderColor: cv('--hc-tooltip-border'),
-        style: { color: cv('--text') }
-      },
-      xAxis: {
-        type: 'datetime',
-        ordinal: false,
-        lineColor: cv('--hc-grid'),
-        tickColor: cv('--hc-grid'),
-        labels: { style: { color: cv('--text-muted'), fontSize: '11px' } },
-        dateTimeLabelFormats: { hour: '%H:%M', minute: '%H:%M', day: '%d.%m' }
-      },
-      yAxis: [
-        { id:'T', labels:{format:'{value}', style:{color:cv('--text-muted'),fontSize:'11px'}}, title:{text:null}, gridLineColor:cv('--hc-grid'), opposite:false },
-        { id:'Q', labels:{format:'{value} hPa', style:{color:cv('--text-muted'),fontSize:'11px'}}, title:{text:null}, gridLineColor:cv('--hc-grid'), opposite:true },
-        { id:'O', labels:{format:'{value}', style:{color:cv('--text-muted'),fontSize:'11px'}}, title:{text:null}, gridLineColor:cv('--hc-grid') }
-      ],
-      legend: {
-        enabled: true,
-        itemStyle: { color: cv('--text-muted'), fontSize: '12px', fontWeight: '400' },
-        itemHoverStyle: { color: cv('--text') }
-      },
-      navigator: {
-        series: { includeInCSVExport: false },
-        xAxis: { gridLineColor: cv('--hc-grid') },
-        outlineColor: cv('--hc-navigator-outline'),
-        handles: { backgroundColor: cv('--hc-handle-bg'), borderColor: cv('--hc-handle-border') },
-        maskFill: cv('--hc-navigator-mask')
-      },
-      scrollbar: { enabled: false },
-      plotOptions: {
-        series: { marker: { radius: 1.5 }, animation: true },
-        line: { gapSize: 5 }
-      },
-      exporting: { enabled: true },
-      series: series
-    });
-
-    for (var ci = 0; ci < channelKeys.length; ci++) {
-      (function(cidx) {
-        loadChannelHistory(cidx, channelKeys[cidx].channelNumber, channelKeys[cidx].key, channelKeys[cidx].fieldList, 0, 1);
-      })(ci);
-    }
-  }
 });
 
+function loadInitial(channelIndex) {
+  var ch = channelKeys[channelIndex];
+  $.getJSON('https://api.thingspeak.com/channels/' + ch.channelNumber + '/feeds.json?offset=0&results=2500&api_key=' + ch.key, function(data) {
+    for (var fi = 0; fi < ch.fieldList.length; fi++) {
+      ch.fieldList[fi].data = [];
+      for (var h = 0; h < data.feeds.length; h++) {
+        var v = data.feeds[h]['field' + ch.fieldList[fi].field];
+        var p = [getChartDate(data.feeds[h].created_at), parseFloat(v)];
+        if (!isNaN(parseFloat(v))) ch.fieldList[fi].data.push(p);
+      }
+      ch.fieldList[fi].name = data.channel['field' + ch.fieldList[fi].field] || ('Field ' + ch.fieldList[fi].field);
+    }
+    ch.loaded = true;
+    channelsLoaded++;
+    if (channelsLoaded === channelKeys.length) createChart();
+  }).fail(function() {
+    document.getElementById('chart-loading').innerHTML = '⚠ Błąd ładowania danych z ThingSpeak.';
+  });
+}
+
+function createChart() {
+  document.getElementById('chart-loading').style.display = 'none';
+
+  var series = [];
+  for (var ci = 0; ci < channelKeys.length; ci++) {
+    for (var fi = 0; fi < channelKeys[ci].fieldList.length; fi++) {
+      series.push({
+        data: channelKeys[ci].fieldList[fi].data,
+        index: channelKeys[ci].fieldList[fi].series,
+        yAxis: channelKeys[ci].fieldList[fi].axis,
+        name: channelKeys[ci].fieldList[fi].name,
+        tooltip: {valueSuffix: ' ' + channelKeys[ci].fieldList[fi].suffix, valueDecimals: 1}
+      });
+    }
+  }
+
+  var cs = getComputedStyle(document.documentElement);
+  var cv = function(n) { return cs.getPropertyValue(n).trim(); };
+
+  dynamicChart = new Highcharts.StockChart({
+    chart: {
+      renderTo: 'chart-container',
+      backgroundColor: 'transparent',
+      zoomType: 'xy',
+      style: { fontFamily: "'Inter', sans-serif" }
+    },
+    rangeSelector: {
+      buttonTheme: {
+        fill: cv('--hc-btn-bg'),
+        stroke: cv('--border'),
+        style: { color: cv('--text-muted') },
+        states: {
+          hover: { fill: cv('--hc-btn-hover') },
+          select: { fill: cv('--hc-btn-sel'), style: { color: cv('--text') } }
+        }
+      },
+      inputStyle: { color: cv('--text-muted'), background: cv('--hc-btn-bg') },
+      labelStyle: { color: cv('--text-muted') },
+      buttons: [
+        {count:30, type:'minute', text:'30m'},
+        {count:12, type:'hour', text:'12h'},
+        {count:1, type:'day', text:'1d'},
+        {count:1, type:'week', text:'1t'},
+        {count:1, type:'month', text:'1M'},
+        {type:'all', text:'Wszystko'}
+      ],
+      selected: 1
+    },
+    title: { text: null },
+    tooltip: {
+      shared: true,
+      xDateFormat: '%A, %d.%m.%Y %H:%M',
+      backgroundColor: cv('--hc-tooltip-bg'),
+      borderColor: cv('--hc-tooltip-border'),
+      style: { color: cv('--text') }
+    },
+    xAxis: {
+      type: 'datetime',
+      ordinal: false,
+      lineColor: cv('--hc-grid'),
+      tickColor: cv('--hc-grid'),
+      labels: { style: { color: cv('--text-muted'), fontSize: '11px' } },
+      dateTimeLabelFormats: { hour: '%H:%M', minute: '%H:%M', day: '%d.%m' }
+    },
+    yAxis: [
+      { id:'T', labels:{format:'{value}', style:{color:cv('--text-muted'),fontSize:'11px'}}, title:{text:null}, gridLineColor:cv('--hc-grid'), opposite:false },
+      { id:'Q', labels:{format:'{value} hPa', style:{color:cv('--text-muted'),fontSize:'11px'}}, title:{text:null}, gridLineColor:cv('--hc-grid'), opposite:true },
+      { id:'O', labels:{format:'{value}', style:{color:cv('--text-muted'),fontSize:'11px'}}, title:{text:null}, gridLineColor:cv('--hc-grid') }
+    ],
+    legend: {
+      enabled: true,
+      itemStyle: { color: cv('--text-muted'), fontSize: '12px', fontWeight: '400' },
+      itemHoverStyle: { color: cv('--text') }
+    },
+    navigator: {
+      series: { includeInCSVExport: false },
+      xAxis: { gridLineColor: cv('--hc-grid') },
+      outlineColor: cv('--hc-navigator-outline'),
+      handles: { backgroundColor: cv('--hc-handle-bg'), borderColor: cv('--hc-handle-border') },
+      maskFill: cv('--hc-navigator-mask')
+    },
+    scrollbar: { enabled: false },
+    plotOptions: {
+      series: { marker: { radius: 1.5 }, animation: true },
+      line: { gapSize: 5 }
+    },
+    exporting: { enabled: true },
+    series: series
+  });
+
+  for (var ci = 0; ci < channelKeys.length; ci++) {
+    (function(cidx) {
+      loadChannelHistory(cidx, channelKeys[cidx].channelNumber, channelKeys[cidx].key, channelKeys[cidx].fieldList, 0, 1);
+    })(ci);
+  }
+}
+
 function loadOneChannel() {
-  var maxLoads = parseInt(document.getElementById('Loads').value);
+  var maxLoads = parseInt(document.getElementById('Loads').value, 10);
   loadChannelHistory(0, channelKeys[0].channelNumber, channelKeys[0].key, channelKeys[0].fieldList, 0, maxLoads);
 }
 
 function loadChannelHistory(channelIndex, channelNumber, key, fieldList, numLoads, maxLoads) {
-  var first_Date = new Date();
+  var firstDate = new Date();
   for (var i = 0; i < fieldList.length; i++) {
     if (fieldList[i].data && fieldList[i].data[0]) {
-      first_Date.setTime(fieldList[i].data[0][0] + 7*60*60*1000);
+      firstDate.setTime(fieldList[i].data[0][0] + 7 * 60 * 60 * 1000);
       break;
     }
   }
-  var end = first_Date.toJSON();
-  $.getJSON('https://api.thingspeak.com/channels/'+channelNumber+'/feed.json?offset=0&results=2500&key='+key+'&end='+end, function(data) {
+
+  var end = firstDate.toJSON();
+
+  $.getJSON('https://api.thingspeak.com/channels/' + channelNumber + '/feeds.json?offset=0&results=2500&api_key=' + key + '&end=' + end, function(data) {
     if (!dynamicChart) return;
+
     for (var fi = 0; fi < fieldList.length; fi++) {
       for (var h = 0; h < data.feeds.length; h++) {
-        var v = data.feeds[h]['field'+fieldList[fi].field];
+        var v = data.feeds[h]['field' + fieldList[fi].field];
         var p = [getChartDate(data.feeds[h].created_at), parseFloat(v)];
-        if (!isNaN(parseInt(v))) fieldList[fi].data.push(p);
+        if (!isNaN(parseFloat(v))) fieldList[fi].data.push(p);
       }
-      fieldList[fi].data.sort(function(a,b){ return a[0]-b[0]; });
+
+      fieldList[fi].data.sort(function(a, b) { return a[0] - b[0]; });
+
       for (var si = 0; si < dynamicChart.series.length; si++) {
         if (dynamicChart.series[si].name === fieldList[fi].name) {
           dynamicChart.series[si].setData(fieldList[fi].data, false);
@@ -721,66 +816,14 @@ function loadChannelHistory(channelIndex, channelNumber, key, fieldList, numLoad
         }
       }
     }
+
     channelKeys[channelIndex].fieldList = fieldList;
     dynamicChart.redraw();
     numLoads++;
-    if (numLoads < maxLoads) loadChannelHistory(channelIndex, channelNumber, key, fieldList, numLoads, maxLoads);
-  });
-}
 
-// ─── Rebuild chart on system theme change ───
-if (window.matchMedia) {
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
-    if (dynamicChart) {
-      dynamicChart.destroy();
-      dynamicChart = null;
-      document.getElementById('chart-container').innerHTML =
-        '<div class="loading-msg"><div class="spinner"></div>Zmiana motywu…</div>';
-      setTimeout(function() {
-        document.getElementById('chart-container').querySelector('.loading-msg').style.display = 'none';
-        createChartFromCache();
-      }, 80);
+    if (numLoads < maxLoads) {
+      loadChannelHistory(channelIndex, channelNumber, key, fieldList, numLoads, maxLoads);
     }
-  });
-}
-
-function createChartFromCache() {
-  var cs = getComputedStyle(document.documentElement);
-  var cv = function(n) { return cs.getPropertyValue(n).trim(); };
-  var series = [];
-  for (var ci = 0; ci < channelKeys.length; ci++) {
-    for (var fi = 0; fi < channelKeys[ci].fieldList.length; fi++) {
-      series.push({
-        data: channelKeys[ci].fieldList[fi].data,
-        yAxis: channelKeys[ci].fieldList[fi].axis,
-        name: channelKeys[ci].fieldList[fi].name,
-        tooltip: {valueSuffix: ' '+channelKeys[ci].fieldList[fi].suffix, valueDecimals: 1}
-      });
-    }
-  }
-  dynamicChart = new Highcharts.StockChart({
-    chart: { renderTo: 'chart-container', backgroundColor: 'transparent', zoomType: 'xy', style: { fontFamily: "'Inter', sans-serif" } },
-    rangeSelector: {
-      buttonTheme: { fill: cv('--hc-btn-bg'), stroke: cv('--border'), style: { color: cv('--text-muted') }, states: { hover: { fill: cv('--hc-btn-hover') }, select: { fill: cv('--hc-btn-sel'), style: { color: cv('--text') } } } },
-      inputStyle: { color: cv('--text-muted'), background: cv('--hc-btn-bg') },
-      labelStyle: { color: cv('--text-muted') },
-      buttons: [{count:30,type:'minute',text:'30m'},{count:12,type:'hour',text:'12h'},{count:1,type:'day',text:'1d'},{count:1,type:'week',text:'1t'},{count:1,type:'month',text:'1M'},{type:'all',text:'Wszystko'}],
-      selected: 1
-    },
-    title: { text: null },
-    tooltip: { shared: true, xDateFormat: '%A, %d.%m.%Y %H:%M', backgroundColor: cv('--hc-tooltip-bg'), borderColor: cv('--hc-tooltip-border'), style: { color: cv('--text') } },
-    xAxis: { type: 'datetime', ordinal: false, lineColor: cv('--hc-grid'), tickColor: cv('--hc-grid'), labels: { style: { color: cv('--text-muted'), fontSize: '11px' } }, dateTimeLabelFormats: { hour: '%H:%M', minute: '%H:%M', day: '%d.%m' } },
-    yAxis: [
-      { id:'T', labels:{format:'{value}', style:{color:cv('--text-muted'),fontSize:'11px'}}, title:{text:null}, gridLineColor:cv('--hc-grid'), opposite:false },
-      { id:'Q', labels:{format:'{value} hPa', style:{color:cv('--text-muted'),fontSize:'11px'}}, title:{text:null}, gridLineColor:cv('--hc-grid'), opposite:true },
-      { id:'O', labels:{format:'{value}', style:{color:cv('--text-muted'),fontSize:'11px'}}, title:{text:null}, gridLineColor:cv('--hc-grid') }
-    ],
-    legend: { enabled: true, itemStyle: { color: cv('--text-muted'), fontSize: '12px', fontWeight: '400' }, itemHoverStyle: { color: cv('--text') } },
-    navigator: { series: { includeInCSVExport: false }, xAxis: { gridLineColor: cv('--hc-grid') }, outlineColor: cv('--hc-navigator-outline'), handles: { backgroundColor: cv('--hc-handle-bg'), borderColor: cv('--hc-handle-border') }, maskFill: cv('--hc-navigator-mask') },
-    scrollbar: { enabled: false },
-    plotOptions: { series: { marker: { radius: 1.5 }, animation: false }, line: { gapSize: 5 } },
-    exporting: { enabled: true },
-    series: series
   });
 }
 </script>
