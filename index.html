@@ -464,7 +464,7 @@
   .page { max-width: 1240px; padding: 2.5rem 2rem 3rem; }
   .header {
     align-items: center; margin-bottom: 1.5rem; padding: 1.8rem 2rem;
-    border: 1px solid var(--border); border-radius: 20px; background: rgba(255,255,255,.78);
+    border: 1px solid var(--border); border-radius: 20px; background: var(--card);
     box-shadow: 0 12px 38px rgba(28,49,38,.045);
   }
   .header-left h1 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -1.25px; }
@@ -522,6 +522,46 @@
     .status-dot { align-self:flex-start; white-space:nowrap; }
     .chart-controls { width:100%; }
     .chart-controls .btn, .chart-controls select { flex:1 1 auto; }
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1110;
+      --surface: #151b19;
+      --card: #19211e;
+      --border: rgba(232, 244, 237, .09);
+      --border-strong: rgba(232, 244, 237, .17);
+      --text: #e7efe9;
+      --text-muted: #a0afa6;
+      --text-dim: #77877d;
+      --accent: #52c49a;
+      --accent-glow: rgba(82, 196, 154, .15);
+      --green: #52c49a;
+      --green-bg: rgba(82, 196, 154, .12);
+      --amber: #f3bd61;
+      --amber-bg: rgba(243, 189, 97, .13);
+      --red: #f07b73;
+      --red-bg: rgba(240, 123, 115, .13);
+      --purple: #b49ae8;
+      --purple-bg: rgba(180, 154, 232, .13);
+      --teal: #52c8bf;
+      --teal-bg: rgba(82, 200, 191, .13);
+      --hc-text: #e7efe9;
+      --hc-muted: #a0afa6;
+      --hc-grid: rgba(232, 244, 237, .08);
+      --hc-tooltip-bg: #19211e;
+      --hc-tooltip-border: rgba(232, 244, 237, .14);
+      --hc-btn-bg: #202b26;
+      --hc-btn-hover: #2a3932;
+      --hc-btn-sel: #34483e;
+      --hc-navigator-mask: rgba(82, 196, 154, .12);
+      --hc-navigator-outline: rgba(232, 244, 237, .16);
+      --hc-handle-bg: #2a3932;
+      --hc-handle-border: rgba(232, 244, 237, .22);
+    }
+    body { background: radial-gradient(ellipse at 88% 0%, rgba(82,196,154,.08), transparent 34rem), var(--bg); }
+    .header, .card, .chart-panel { box-shadow: 0 12px 38px rgba(0,0,0,.18); }
+    .metrics-grid .card:hover { box-shadow: 0 14px 34px rgba(0,0,0,.28); }
+    .btn-primary:hover { background: #087f5b; }
   }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; } }
 </style>
