@@ -417,6 +417,113 @@
   .highcharts-legend-item text { fill: var(--text-muted) !important; }
   .highcharts-navigator-outline { stroke: var(--hc-navigator-outline) !important; }
   .highcharts-crosshair { stroke: var(--text-dim) !important; }
+
+  /* Refreshed Hajnówka air quality dashboard */
+  :root {
+    --bg: #f4f6f3;
+    --surface: #edf1ec;
+    --card: #ffffff;
+    --border: rgba(22, 38, 31, 0.09);
+    --border-strong: rgba(22, 38, 31, 0.17);
+    --text: #17251f;
+    --text-muted: #68766f;
+    --text-dim: #849189;
+    --accent: #087f5b;
+    --accent-glow: rgba(8, 127, 91, 0.1);
+    --green: #087f5b;
+    --green-bg: rgba(8, 127, 91, 0.09);
+    --amber: #b7791f;
+    --amber-bg: rgba(183, 121, 31, 0.1);
+    --red: #c2413b;
+    --red-bg: rgba(194, 65, 59, 0.09);
+    --purple: #7256a8;
+    --purple-bg: rgba(114, 86, 168, 0.09);
+    --teal: #168a85;
+    --teal-bg: rgba(22, 138, 133, 0.09);
+    --hc-text: #17251f;
+    --hc-muted: #68766f;
+    --hc-grid: rgba(22, 38, 31, 0.08);
+    --hc-tooltip-bg: #ffffff;
+    --hc-tooltip-border: rgba(22, 38, 31, 0.12);
+    --hc-btn-bg: #edf1ec;
+    --hc-btn-hover: #e1e9e2;
+    --hc-btn-sel: #d5e6dc;
+    --hc-navigator-mask: rgba(8, 127, 91, 0.1);
+    --hc-navigator-outline: rgba(22, 38, 31, 0.12);
+    --hc-handle-bg: #e1e9e2;
+    --hc-handle-border: rgba(22, 38, 31, 0.2);
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse at 88% 0%, rgba(8,127,91,0.07), transparent 34rem),
+      var(--bg);
+    color: var(--text);
+  }
+
+  .page { max-width: 1240px; padding: 2.5rem 2rem 3rem; }
+  .header {
+    align-items: center; margin-bottom: 1.5rem; padding: 1.8rem 2rem;
+    border: 1px solid var(--border); border-radius: 20px; background: rgba(255,255,255,.78);
+    box-shadow: 0 12px 38px rgba(28,49,38,.045);
+  }
+  .header-left h1 { font-size: clamp(26px, 4vw, 38px); letter-spacing: -1.25px; }
+  .header-left p { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .eyebrow { color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 9px; }
+  .status-dot { margin: 0; background: var(--green-bg); border-color: transparent; color: var(--green); font-weight: 600; padding: 8px 13px; }
+  .metrics-grid { gap: 14px; margin-bottom: 14px; }
+  .card, .chart-panel {
+    background: var(--card); border-color: var(--border); border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(28,49,38,.035);
+  }
+  .card { min-height: 154px; padding: 1.25rem 1.35rem; }
+  .card-label { color: var(--text-muted); font-weight: 700; letter-spacing: .9px; }
+  .card-value { font-size: 34px; letter-spacing: -1.4px; }
+  .card-unit { color: var(--text-muted); }
+  .card-quality { border-radius: 999px; padding: 4px 9px; font-size: 10px; }
+  .chart-panel { margin-top: 14px; }
+  .chart-header { padding: 1.2rem 1.4rem; }
+  .chart-title { font-size: 15px; font-weight: 650; }
+  #chart-container { height: 440px; }
+  .btn { border-radius: 8px; color: var(--text-muted); }
+  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primary:hover { background: #066b4d; color: #fff; }
+  .footer-row { padding: .95rem 1.35rem; border-top: 1px solid var(--border); }
+  .footer-row span { color: var(--text-muted) !important; }
+  .update-toggle { color:var(--text-muted); }
+  @media (max-width:900px) { .page { padding:1.2rem 1rem 2rem; } }
+  @media (max-width:650px) {
+    .page { padding:.8rem .7rem 1.5rem; }
+    .header { padding:1.2rem; border-radius:15px; }
+    .metrics-grid { gap:9px; }
+    .metrics-grid .card:last-child { grid-column:auto; }
+    .card { min-height:138px; padding:1rem; }
+    .card-value { font-size:29px; }
+    .chart-header { align-items:flex-start; padding:1rem; }
+    #chart-container { height:370px; padding:.45rem; }
+  }
+
+  .header { position:relative; overflow:hidden; }
+  .header::after { content:""; position:absolute; width:260px; height:260px; right:-76px; top:-140px; border-radius:50%; background:radial-gradient(circle,rgba(8,127,91,.12),transparent 68%); pointer-events:none; }
+  .header-left, .status-dot { position:relative; z-index:1; }
+  .metrics-grid .card { transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .metrics-grid .card:hover { transform:translateY(-3px); box-shadow:0 14px 34px rgba(28,49,38,.09); border-color:var(--border-strong); }
+  .card-label { margin-bottom:14px; }
+  .card-unit { margin-top:8px; }
+  .chart-panel { margin-top:18px; }
+  .chart-header { align-items:center; }
+  .chart-title { display:flex; align-items:center; gap:10px; }
+  .chart-title::before { content:""; display:block; width:9px; height:9px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 5px var(--green-bg); }
+  .btn { min-height:34px; }
+  .btn:focus-visible, select:focus-visible, input:focus-visible { outline:3px solid rgba(8,127,91,.25); outline-offset:2px; }
+  .footer-row { font-size:12px; }
+  @media (max-width:650px) {
+    .header { align-items:flex-start; gap:16px; }
+    .status-dot { align-self:flex-start; white-space:nowrap; }
+    .chart-controls { width:100%; }
+    .chart-controls .btn, .chart-controls select { flex:1 1 auto; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; scroll-behavior:auto !important; } }
 </style>
 </head>
 <body>
@@ -424,8 +531,9 @@
 
   <div class="header">
     <div class="header-left">
+      <div class="eyebrow">Monitoring powietrza · Podlasie</div>
       <h1>Jakość powietrza — Hajnówka</h1>
-      <p>kanał ThingSpeak 265521 · BME + SDS</p>
+      <p>Bieżące pomiary lokalnej stacji — pyły, temperatura i wilgotność.</p>
     </div>
     <div class="status-dot" id="status-label">Ładowanie…</div>
   </div>
